@@ -5,16 +5,18 @@ import GlobeFallback from "./GlobeFallback";
 
 // Dynamically import the GlobeVisualization component
 const GlobeVisualization = lazy(() => 
-  import("./GlobeVisualization").catch(() => ({
+  import("./GlobeVisualization").then(module => ({
+    default: module.default
+  })).catch(() => ({
     default: () => <GlobeFallback />
   }))
 );
 
-const SafeGlobeVisualization = () => {
+const SafeGlobeVisualization = ({ className = "" }: { className?: string }) => {
   return (
     <ErrorBoundary fallback={<GlobeFallback />}>
       <Suspense fallback={<GlobeFallback />}>
-        <GlobeVisualization />
+        <GlobeVisualization className={className} />
       </Suspense>
     </ErrorBoundary>
   );

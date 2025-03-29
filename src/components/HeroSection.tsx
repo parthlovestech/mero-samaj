@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Users, Heart, Flag } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import GlobeVisualization from "./GlobeVisualization";
+import SafeGlobeVisualization from "./SafeGlobeVisualization";
 
 const HeroSection = () => {
   const fadeIn = {
@@ -110,7 +110,7 @@ const HeroSection = () => {
             className="relative flex justify-center items-center"
           >
             <div className="relative w-full h-[450px] md:h-[500px]">
-              <GlobeVisualization className="w-full h-full scale-110" />
+              <SafeGlobeVisualization className="w-full h-full scale-110" />
               
               {/* Floating cards */}
               <motion.div

@@ -1,6 +1,6 @@
 
 import { useRef, useEffect } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import { Sphere, OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 
@@ -30,19 +30,9 @@ const latLngToVector3 = (lat: number, lng: number, radius: number) => {
 // Globe component
 const Globe = () => {
   const globeMaterial = useRef<THREE.MeshStandardMaterial | null>(null);
-  const globeRef = useRef<THREE.Mesh | null>(null);
-  const pointsRef = useRef<THREE.Group | null>(null);
+  const globeRef = useRef<THREE.Mesh>(null);
+  const pointsRef = useRef<THREE.Group>(null);
 
-  useFrame(() => {
-    if (globeRef.current) {
-      globeRef.current.rotation.y += 0.001;
-    }
-    if (pointsRef.current) {
-      pointsRef.current.rotation.y += 0.001;
-    }
-  });
-
-  // Create texture with dots for continents suggestion
   useEffect(() => {
     if (globeMaterial.current) {
       const canvas = document.createElement("canvas");
@@ -78,7 +68,10 @@ const Globe = () => {
     <>
       <ambientLight intensity={0.3} />
       <pointLight position={[10, 10, 10]} intensity={1.5} />
-      <Sphere args={[2, 64, 64]} ref={globeRef}>
+      
+      {/* Main globe */}
+      <mesh ref={globeRef}>
+        <sphereGeometry args={[2, 64, 64]} />
         <meshStandardMaterial
           ref={globeMaterial}
           color="#1a237e"
@@ -87,17 +80,18 @@ const Globe = () => {
           roughness={0.8}
           metalness={0.2}
         />
-      </Sphere>
+      </mesh>
       
       {/* Glow effect */}
-      <Sphere args={[2.1, 64, 64]}>
+      <mesh>
+        <sphereGeometry args={[2.1, 64, 64]} />
         <meshStandardMaterial
           color="#4a6ff3"
           transparent={true}
           opacity={0.15}
           roughness={1}
         />
-      </Sphere>
+      </mesh>
       
       {/* Markers */}
       <group ref={pointsRef}>
@@ -106,7 +100,11 @@ const Globe = () => {
           return (
             <mesh key={index} position={[position.x, position.y, position.z]}>
               <sphereGeometry args={[marker.size * 0.05, 16, 16]} />
-              <meshStandardMaterial color={marker.color} emissive={marker.color} emissiveIntensity={0.5} />
+              <meshStandardMaterial 
+                color={marker.color} 
+                emissive={marker.color} 
+                emissiveIntensity={0.5} 
+              />
             </mesh>
           );
         })}
