@@ -1,13 +1,61 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { motion } from "framer-motion";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import HeroSection from "@/components/HeroSection";
+import HowItWorks from "@/components/HowItWorks";
+import StatsSection from "@/components/StatsSection";
+import FeaturedProjects from "@/components/FeaturedProjects";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import CallToAction from "@/components/CallToAction";
+import IssueReportCard from "@/components/IssueReportCard";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <Navbar />
+      
+      <main>
+        <HeroSection />
+        
+        <HowItWorks />
+        
+        <StatsSection />
+        
+        <section className="py-20 px-6">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+              viewport={{ once: true }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                Report a Social Issue
+              </h2>
+              <p className="max-w-2xl mx-auto text-muted-foreground">
+                Notice a problem in your community? Let us know and we'll work together to address it.
+              </p>
+            </motion.div>
+            
+            <IssueReportCard />
+          </div>
+        </section>
+        
+        <FeaturedProjects />
+        
+        <TestimonialsSection />
+        
+        <CallToAction />
+      </main>
+      
+      <Footer />
+    </motion.div>
   );
 };
 
