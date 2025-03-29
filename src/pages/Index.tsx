@@ -2,13 +2,14 @@
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import HeroSection from "@/components/HeroSection";
 import HowItWorks from "@/components/HowItWorks";
 import StatsSection from "@/components/StatsSection";
 import FeaturedProjects from "@/components/FeaturedProjects";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import CallToAction from "@/components/CallToAction";
 import IssueReportCard from "@/components/IssueReportCard";
+import SafeGlobeVisualization from "@/components/SafeGlobeVisualization";
+import HeroSection from "@/components/HeroSection";
 
 const Index = () => {
   return (
